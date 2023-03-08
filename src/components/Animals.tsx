@@ -1,7 +1,7 @@
-import { Card, Button } from 'react-bootstrap';
 import { useState, useEffect } from  'react';
 import { IAnimalSmall } from '../models/IAnimalSmall';
 import { getAnimals } from "../services/animalServices";
+import { Animal } from './Animal';
 
 export function Animals(){
     const [animals, setAnimals] = useState<IAnimalSmall[]>([]);
@@ -19,10 +19,8 @@ export function Animals(){
     
 let animalHtml = animals.map((animal) => {
     return (
-        <Animal
-        
-        >
-        </Animal>
+        <Animal animal={animal}key={animal.id} />
     )
-})
+});
+return {animalHtml}
 }
