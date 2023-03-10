@@ -1,9 +1,10 @@
-import { useState, useEffect } from  'react';
-import { IAnimalSmall } from '../models/IAnimalSmall';
+import { useEffect, useState } from  'react';
+import { IAnimalSmall } from "../models/IAnimalSmall";
 import { getAnimals } from "../services/animalServices";
-import { Animal } from './Animal';
+import { Animal } from "./Animal";
 
-export function Animals(){
+
+export const Animals = () => {
     const [animals, setAnimals] = useState<IAnimalSmall[]>([]);
 
     useEffect(() => {
@@ -12,15 +13,21 @@ export function Animals(){
 
             setAnimals(animals);
         };
+
         if(animals.length > 0) return;
 
         getData();
     });
     
-let animalHtml = animals.map((animal) => {
+let animalsHtml = animals.map((animal) => {
     return (
-        <Animal animal={animal}key={animal.id} />
-    )
+        <Animal 
+            animal={animal} 
+            key={animal.id}
+        ></Animal>
+        
+    );
 });
-return {animalHtml}
-}
+
+return <>{animalsHtml}</>
+};

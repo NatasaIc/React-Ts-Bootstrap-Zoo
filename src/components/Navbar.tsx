@@ -6,8 +6,11 @@ export const Navbar = () => {
     <NavbarBs sticky='top' className='bg-white shadow-sm mb-3'>
         <Container>
             <Nav>
+             <Nav.Link to='/' as={NavLink}>
+                ZOOSPA
+             </Nav.Link>
              <Nav.Link to='/animals' as={NavLink}>
-                Hälsa på våra djur
+                Mata djuren
              </Nav.Link>
             </Nav>
         </Container>
