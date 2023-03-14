@@ -1,4 +1,4 @@
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { IAnimalSmall } from "../models/IAnimalSmall"
 
@@ -16,10 +16,10 @@ export const Animal = (props: IAnimalProps) => {
 
     return (
         <>
-            <Card className="h-100" style={{ widows: "200px" }}>
+            <Card className="h-100" style={{ width: "300px" }}>
                 <Card.Img 
                 variant="top"
-                src={props.animal.imageUrl} height="500px" 
+                src={props.animal.imageUrl} height="200px" 
                 style={{ objectFit: "cover" }} />
                 <Card.Body>
                     <Card.Title>

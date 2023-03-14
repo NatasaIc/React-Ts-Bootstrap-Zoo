@@ -7,7 +7,7 @@ export const Navbar = () => {
         <Container>
             <Nav>
              <Nav.Link to='/' as={NavLink}>
-                ZOOSPA
+                ZOO
              </Nav.Link>
              <Nav.Link to='/animals' as={NavLink}>
                 Mata djuren

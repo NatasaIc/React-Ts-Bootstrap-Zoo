@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useEffect, useReducer, useState } from "react"
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { IAnimal } from "../models/IAnimal";
 import { getAnimalById } from "../services/animalServices";
@@ -36,12 +37,24 @@ export const AnimalDetails = () => {
             ) : (
 
                 <>
-                    <img src={animal?.imageUrl} alt={animal?.name} />
-                    <h3>{animal?.name}</h3>
-                    <pre>{animal?.shortDescription}</pre>
-                    <p>{animal?.isFed}</p>
-                    <p>{animal?.lastFed}</p>
-                    <button>Mata mig</button>
+                    <Card className="h-100" 
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: "300px", marginTop: '100px'}}>
+                        <Card.Img src={animal?.imageUrl} alt={animal?.name} 
+                             height="200px" 
+                             style={{ objectFit: "cover" }} />
+                        <Card.Body>
+                            <Card.Title>
+                                 <span>{animal?.name}</span>
+                            </Card.Title>
+                                <div className="mt-auto">
+                                    <p>{animal?.shortDescription}</p>
+                                </div>
+                                <p>{animal?.isFed}</p>
+                                <p>{animal?.lastFed}</p>
+                                <Button variant="success">Mata mig</Button>
+                                <Button variant="danger">Matad</Button>
+                        </Card.Body>
+                    </Card>
                 </>
             )}
         </>

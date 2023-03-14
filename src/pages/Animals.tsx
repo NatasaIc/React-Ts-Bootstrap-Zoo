@@ -1,7 +1,8 @@
 import { useEffect, useState } from  'react';
+import { Col, Row } from 'react-bootstrap';
 import { IAnimalSmall } from "../models/IAnimalSmall";
 import { getAnimals } from "../services/animalServices";
-import { Animal } from "./Animal";
+import { Animal } from "../components/Animal";
 
 
 export const Animals = () => {
@@ -21,11 +22,9 @@ export const Animals = () => {
     
 let animalsHtml = animals.map((animal) => {
     return (
-        <Animal 
-            animal={animal} 
-            key={animal.id}
-        ></Animal>
-        
+        <>
+        <Animal animal={animal} key={animal.id}></Animal>
+        </>
     );
 });
 
