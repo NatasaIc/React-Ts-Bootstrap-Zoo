@@ -30,7 +30,7 @@ export const Home: React.FC = () => {
 
     return (
       <>
-      <h1>Djuren</h1>
+      <h1>Våra djur</h1>
         <Row md={2} xs={1} lg={3} className='d-flex justify-content-center g-3'>
             {animals.map(animal => (
                 <Card key={animal.id} className="h-200" style={{ padding: '0', gap: '.5rem' }}>

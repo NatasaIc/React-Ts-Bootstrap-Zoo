@@ -71,7 +71,7 @@ export const AnimalDetails = () => {
         </>
       ) : (
         <Button onClick={feedAnimal} variant='success' className="w-100">
-        Mata {animal.name}</Button>
+        Mata {animal.name}!</Button>
       )}
       </Card.Body>
     </Card>
