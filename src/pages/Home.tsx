@@ -1,23 +1,37 @@
 import { Card } from "react-bootstrap"
 import logo from '../assets/images/pngegg (2).png';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
+
+interface Animal {
+    id: number;
+    name: string;
+    description: string;
+    lastFedTime: string;
+}
 
 export const Home = () => {
+    const [animals, setAnimals] = useState<Animal[]>([]);
+
+    useEffect(() => {
+        const fetchAnimals = async () => {
+            const response = await axios.get('https://animals.azurewebsites.net/api/animals');
+            setAnimals(response.data);
+        };
+
+        fetchAnimals();
+    }, []);
+
     return (
-        <>
-            <Card style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: 'none', marginTop: '100px', padding: '100px' }}>
-                <Card.Img variant="top" src={logo} alt="dog in a tub" />
-                <Card.Body>
-                    <Card.Title>
-                        Mata mig!
-                    </Card.Title>
-                    <Card.Text>
-                    Det är viktigt att du som kund känner dig trygg när du handlar hos oss. 
-                    Genom rätt kunskap och bra service kan du lita på att du får det du förväntar dig av oss. 
-                    Du är alltid varmt välkommen att kontakta vår 
-                    kunniga kundservice om du har frågor eller behöver rådgivning
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-        </>
+        <div>
+            <h1>Animals</h1>
+            {animals.map((animal) => (
+                <div key={animal.id}>
+                    <h2>{animal.name}</h2>
+                    <p>{animal.description}</p>
+                    <a href={`/animal/${animal.id}`}>Läs mer</a>
+                </div>
+            ))}
+        </div>
     )
 }
