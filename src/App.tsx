@@ -5,11 +5,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 function App() {
   return (
     <>
-        <Container className='mb-4' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-          <main>
+      <Container className='mb-4'>
             <Outlet></Outlet>
-          </main>
-        </Container>
+      </Container>
     </>
   );
 }

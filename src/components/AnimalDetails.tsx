@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { Button, Card } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 interface Animal {
   id: number;
   name: string;
-  shortDescription: string;
+  latinName: string;
+  longDescription: string;
   imageUrl: string;
   lastFed: string;
   isFed: boolean;
@@ -50,15 +52,29 @@ export const AnimalDetails = () => {
     
 
     return (
-      <div>
-      <h2>{animal.name}</h2>
-      <img src={animal.imageUrl} alt={animal.name}/>
-      <p>{animal.shortDescription}</p>
+      <div style={{ marginTop: '100px' }}>
+      <Card>
+      <Card.Body className="d-flex flex-column justify-content-center">
+      <Card.Img src={animal.imageUrl} alt={animal.name}/>
+      <Card.Title className="d-flex align-items-center mb-4" style={{ marginTop: '10px' }}>
+      {animal.latinName}</Card.Title>
+      <Card.Text>{animal.longDescription}</Card.Text>
       {animal.isFed ? (
+        <>
         <p>Senast matad: {animal.lastFed}</p>
+        {new Date(animal.lastFed).getTime() + 3 * 60 * 60 * 1000 < Date.now() ? (
+          <p>Mata djuret!</p>
+        ) : (
+          <button disabled>Redan matad</button>
+        )}
+         <p>Laddar...</p>
+        </>
       ) : (
-        <button onClick={feedAnimal}>Mata djuret!</button>
+        <Button onClick={feedAnimal} variant='success' className="w-100">
+        Mata {animal.name}</Button>
       )}
+      </Card.Body>
+    </Card>
     </div>
   );
 };
