@@ -1,37 +1,42 @@
-import { Card } from "react-bootstrap"
-import logo from '../assets/images/pngegg (2).png';
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import { Link } from "react-router-dom";
 
-interface Animal {
+export interface Animal {
     id: number;
     name: string;
-    description: string;
-    lastFedTime: string;
+    shortDescription: string;
+    imageUrl: string;
 }
 
-export const Home = () => {
+export const Home: React.FC = () => {
     const [animals, setAnimals] = useState<Animal[]>([]);
 
     useEffect(() => {
         const fetchAnimals = async () => {
-            const response = await axios.get('https://animals.azurewebsites.net/api/animals');
-            setAnimals(response.data);
-        };
+            const response = await fetch('https://animals.azurewebsites.net/api/animals');
+            const data = await response.json();
 
-        fetchAnimals();
+            localStorage.setItem("animals", JSON.stringify(data));
+            setAnimals(data);
+        };
+        const animalsFromLocalStorage = localStorage.getItem("animals");
+        if(animalsFromLocalStorage){
+            setAnimals(JSON.parse(animalsFromLocalStorage));
+        } else {
+            fetchAnimals();
+        }
     }, []);
 
     return (
         <div>
-            <h1>Animals</h1>
-            {animals.map((animal) => (
+            {animals.map(animal => (
                 <div key={animal.id}>
+                    <img src={animal.imageUrl} alt={animal.name}/>
                     <h2>{animal.name}</h2>
-                    <p>{animal.description}</p>
-                    <a href={`/animal/${animal.id}`}>Läs mer</a>
+                    <p>{animal.shortDescription}</p>
+                    <Link to={`/animalDetails/${animal.id}`}>Läss mer</Link>
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
